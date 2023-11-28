@@ -55,4 +55,32 @@ public class HomesController : ControllerBase
 
         }
     }
+    [HttpDelete("{homeId}")]
+    public ActionResult<string> DestroyHome(int homeId)
+    {
+        try
+        {
+            string message = _homesService.DestroyHome(homeId);
+            return Ok(message);
+        }
+        catch (Exception error)
+        {
+
+            return BadRequest(error.Message);
+        }
+    }
+    [HttpPut("{homeId}")]
+    public ActionResult<Home> UpdateHome(int homeId, [FromBody] Home homeData)
+    {
+        try
+        {
+            Home home = _homesService.UpdateHome(homeId, homeData);
+            return Ok(home);
+        }
+        catch (Exception error)
+        {
+
+            return BadRequest(error.Message);
+        }
+    }
 }

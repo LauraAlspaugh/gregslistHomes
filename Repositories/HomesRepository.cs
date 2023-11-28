@@ -1,6 +1,9 @@
 
 
 
+
+
+
 namespace gregslistHomes.Repositories;
 
 public class HomesRepository
@@ -22,6 +25,8 @@ public class HomesRepository
         return home;
     }
 
+
+
     internal Home GetHomeById(int homeId)
     {
         string sql = "SELECT * FROM homes WHERE id = @homeId;";
@@ -34,5 +39,22 @@ public class HomesRepository
         string sql = "SELECT * FROM homes;";
         List<Home> homes = _db.Query<Home>(sql).ToList();
         return homes;
+    }
+
+    internal void DestroyHome(int homeId)
+    {
+        string sql = "DELETE FROM homes WHERE id = @homeId LIMIT 1;";
+        _db.Execute(sql, new { homeId });
+    }
+
+    internal void UpdateHome(Home newHome)
+    {
+        string sql = @"
+        UPDATE homes SET 
+        name = @Name,
+        description = @Description,
+        price = @Price
+        WHERE id = @id;";
+        _db.Execute(sql, newHome);
     }
 }
