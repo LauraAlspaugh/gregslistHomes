@@ -16,14 +16,32 @@ CREATE TABLE
         price INT UNSIGNED NOT NULL
     ) default charset utf8 COMMENT '';
 
+CREATE TABLE
+    IF NOT EXISTS jobs(
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'this is the id of a job',
+        name CHAR(255) NOT NULL COMMENT 'this is the job name',
+        description CHAR(255) NOT NULL COMMENT 'this is the description for the job',
+        wage INT UNSIGNED NOT NULL
+    ) default charset utf8 COMMENT '';
+
 INSERT INTO
-    homes (name, description, price)
+    homes (name, description, wage)
 VALUES (
         'LA Mansion',
         'Beautiful home in downtown LA',
         400000
     );
 
+INSERT INTO
+    jobs (name, description, price)
+VALUES (
+        'Street Sweeper',
+        'Sweep the streets obviously',
+        15
+    );
+
 SELECT * FROM homes;
+
+SELECT * FROM jobs;
 
 DROP TABLE homes;
