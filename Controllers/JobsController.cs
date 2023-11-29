@@ -68,5 +68,19 @@ public class JobsController : ControllerBase
 
         }
     }
+    [HttpPut("{jobId}")]
+    public ActionResult<Job> EditJob(int jobId, [FromBody] Job jobData)
+    {
+        try
+        {
+            Job job = _jobsService.EditJob(jobId, jobData);
+            return Ok(job);
+        }
+        catch (Exception error)
+        {
+
+            return BadRequest(error.Message);
+        }
+    }
 
 }
