@@ -1,5 +1,8 @@
 
 
+
+
+
 namespace gregslistHomes.Repositories;
 
 public class JobsRepository
@@ -9,6 +12,18 @@ public class JobsRepository
     {
         _db = db;
     }
+
+    internal Job CreateJob(Job jobData)
+    {
+        string sql = @"
+    INSERT INTO jobs(name, description, wage)
+    VALUES(@Name, @Description, @Wage);
+       SELECT * FROM jobs WHERE id = LAST_INSERT_ID();";
+        Job job = _db.Query<Job>(sql, jobData).FirstOrDefault();
+        return job;
+    }
+
+
 
     internal Job GetJobById(int jobId)
     {
@@ -22,5 +37,11 @@ public class JobsRepository
         string sql = "SELECT * FROM jobs;";
         List<Job> jobs = _db.Query<Job>(sql).ToList();
         return jobs;
+    }
+
+    internal void DestroyJob(int jobId)
+    {
+        string sql = "DELETE FROM jobs WHERE id = @jobId LIMIT 1;";
+        _db.Execute(sql, new { jobId });
     }
 }

@@ -1,5 +1,8 @@
 
 
+
+
+
 namespace gregslistHomes.Services;
 public class JobsService
 {
@@ -8,6 +11,19 @@ public class JobsService
     public JobsService(JobsRepository jobsRepository)
     {
         _jobsRepository = jobsRepository;
+    }
+
+    internal Job CreateJob(Job jobData)
+    {
+        Job job = _jobsRepository.CreateJob(jobData);
+        return job;
+    }
+
+    internal string DestroyJob(int jobId)
+    {
+        Job job = GetJobById(jobId);
+        _jobsRepository.DestroyJob(jobId);
+        return "this job has been destroyed";
     }
 
     internal Job GetJobById(int jobId)

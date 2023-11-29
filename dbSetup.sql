@@ -25,7 +25,7 @@ CREATE TABLE
     ) default charset utf8 COMMENT '';
 
 INSERT INTO
-    homes (name, description, wage)
+    homes (name, description, price)
 VALUES (
         'LA Mansion',
         'Beautiful home in downtown LA',
@@ -33,7 +33,7 @@ VALUES (
     );
 
 INSERT INTO
-    jobs (name, description, price)
+    jobs (name, description, wage)
 VALUES (
         'Street Sweeper',
         'Sweep the streets obviously',
@@ -45,3 +45,5 @@ SELECT * FROM homes;
 SELECT * FROM jobs;
 
 DROP TABLE homes;
+
+DROP TABLE jobs;

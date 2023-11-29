@@ -37,5 +37,36 @@ public class JobsController : ControllerBase
             return BadRequest(error.Message);
         }
     }
+    [HttpPost]
+    public ActionResult<Job> CreateJob([FromBody] Job jobData)
+    {
+        try
+        {
+            Job job = _jobsService.CreateJob(jobData);
+            return Ok(job);
+        }
+        catch (Exception error)
+        {
+
+            return BadRequest(error.Message);
+
+
+        }
+    }
+    [HttpDelete("{jobId}")]
+    public ActionResult<string> DestroyJob(int jobId)
+    {
+        try
+        {
+            string message = _jobsService.DestroyJob(jobId);
+            return Ok(message);
+        }
+        catch (Exception error)
+        {
+
+            return BadRequest(error.Message);
+
+        }
+    }
 
 }
